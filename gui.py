@@ -2,10 +2,80 @@
 
 import csv
 import pandas as pd
-from twilio.rest import Client
 import os
+import student
 
 
+import tkinter as tk
+
+class Window(tk.Tk):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.title("Student Auto-Messenger")
+        self.geometry("600x500")
+
+        self.exit_button = tk.Button(self, text="Exit", command=self.destroy)
+        self.exit_button.pack(side='bottom',anchor='center')
+
+        self.add_student_button = tk.Button(self, text="Add Student", command=self.add)
+        self.add_student_button.pack()
+
+        # self.delete_student_button = tk.Button(self, text="Delete Student", command=self.delete())
+        # self.delete_student_button.pack()
+        #
+        # self.view_student_button = tk.Button(self, text="Add Student", command=self.view())
+        # self.view_student_button.pack()
+    def add(self):
+        # Will open a new window to add a new student
+        add = Add_Student_Window()
+        add.mainloop()
+
+    def delete(self):
+        return 0
+    def view(self):
+        return 0
+
+
+class Add_Student_Window(tk.Tk):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.title("Add Student Info")
+        self.geometry("300x200")
+        self.exit_button = tk.Button(self, text="Exit", command=self.destroy)
+        self.exit_button.pack(side='bottom',anchor='center')
+
+        self.student_name = tk.Text(self, height=2, width=20)
+        self.student_name.pack()
+
+        self.student_phone = tk.Text(self,height=2, width=20)
+        self.student_phone.pack()
+
+        self.student_class_time = tk.Text(self, height=2, width=20)
+        self.student_class_time.pack()
+
+        self.student_class_day = tk.Text(self, height=2, width=20)
+        self.student_class_day.pack()
+
+        self.submit_button = tk.Button(self, text="Submit", command=self.submit)
+        self.submit_button.pack()
+
+    def submit(self):
+        student_name = self.student_name.get("1.0", "end-1c")
+        student_phone = self.student_phone.get("1.0", "end-1c")
+        student_class_time = self.student_class_time.get("1.0", "end-1c")
+        student_class_day = self.student_class_day.get("1.0", "end-1c")
+
+        add_student = student.Student(student_name, student_phone, student_class_time, student_class_day)
+
+if __name__ == "__main__":
+    app = Window()
+    app.mainloop()
+
+
+
+# Previous Iteration of Student Auto-Messenger
+"""
+region
 def user_interface():
     global choice
     exit_option = True
@@ -200,7 +270,5 @@ def find_row_using_name(day, file_name):
                         return
                     else:
                         return
+"""
 
-
-if __name__ == "__main__":
-    user_interface()
