@@ -5,7 +5,7 @@ import pandas as pd
 import os
 import student
 import database
-
+from datetime import datetime
 
 import tkinter as tk
 
@@ -66,10 +66,12 @@ class Add_Student_Window(tk.Tk):
         student_class_time = self.student_class_time.get("1.0", "end-1c")
         student_class_day = self.student_class_day.get("1.0", "end-1c")
 
+        student_class_time = datetime.strptime(student_class_time, '%H:%M').time()
+
         add_student = student.Student(student_name, student_phone, student_class_time, student_class_day)
 
-        database_obj = database.Database()
-        database_obj.add_student(add_student)
+        database_obj = database.Database(add_student)
+        database_obj.add_student()
 
 
 
