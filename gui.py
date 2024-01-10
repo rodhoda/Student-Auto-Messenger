@@ -4,6 +4,7 @@ import csv
 import pandas as pd
 import os
 import student
+import database
 
 
 import tkinter as tk
@@ -66,6 +67,11 @@ class Add_Student_Window(tk.Tk):
         student_class_day = self.student_class_day.get("1.0", "end-1c")
 
         add_student = student.Student(student_name, student_phone, student_class_time, student_class_day)
+
+        database_obj = database.Database()
+        database_obj.add_student(add_student)
+
+
 
 if __name__ == "__main__":
     app = Window()
