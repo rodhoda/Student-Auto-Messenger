@@ -28,7 +28,7 @@ Session = sessionmaker(bind=engine)
 
 
 class Database():
-    def __init__(self, student_object):
+    def __init__(self, student_object=None):
         self.student_name = student_object.name
         self.student_phone = student_object.number
         self.student_class_time = student_object.class_time

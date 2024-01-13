@@ -83,8 +83,6 @@ class AddStudentWindow(tk.Tk):
         database_obj.add_student()
 
         self.destroy()
-
-
 class DeleteStudentWindow(tk.Tk):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs )
@@ -92,7 +90,7 @@ class DeleteStudentWindow(tk.Tk):
         self.title("Delete Student Info")
         self.geometry("500x200")
 
-        tk.Label(self, text="Student Name:").grid(row=0, column=0, sticky='e')
+        tk.Label(self, text=f"Student Name:").grid(row=0, column=0, sticky='e')
         self.student_name = tk.Text(self, height=2, width=20)
         self.student_name.grid(row=0, column=1)
 
@@ -107,12 +105,8 @@ class DeleteStudentWindow(tk.Tk):
         database_obj.delete_student()
 
         self.destroy()
-
-
-
-
-
-
-if __name__ == "__main__":
-    app = Window()
-    app.mainloop()
+class ViewStudentWindow(tk.Tk):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.title("View All Student Info")
+        self.geometry("400x400")
