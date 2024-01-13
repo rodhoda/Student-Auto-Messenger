@@ -18,23 +18,25 @@ class Window(tk.Tk):
         self.add_student_button = tk.Button(self, text="Add Student", command=self.add)
         self.add_student_button.pack(side='top')
 
+        self.delete_student_button = tk.Button(self, text="Delete Student", command=self.delete)
+        self.delete_student_button.pack()
+
         tk.Label(self, text="Welcome to the Student Auto Messenger!").pack(expand=True)
 
         self.exit_button = tk.Button(self, text="Exit", command=self.destroy)
         self.exit_button.pack(side='bottom',anchor='center')
 
-        # self.delete_student_button = tk.Button(self, text="Delete Student", command=self.delete())
-        # self.delete_student_button.pack()
-        #
+
+
         # self.view_student_button = tk.Button(self, text="Add Student", command=self.view())
         # self.view_student_button.pack()
     def add(self):
-        # Will open a new window to add a new student
-        add = AddStudentWindow()
-        add.mainloop()
+        add_window = AddStudentWindow()
+        add_window.mainloop()
 
     def delete(self):
-        return 0
+        delete_window = DeleteStudentWindow()
+        delete_window.mainloop()
     def view(self):
         return 0
 
@@ -43,7 +45,7 @@ class AddStudentWindow(tk.Tk):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.title("Add Student Info")
-        self.geometry("300x200")
+        self.geometry("500x200")
 
         tk.Label(self, text="Student Name:").grid(row=0, column=0, sticky='e')
         self.student_name = tk.Text(self, height=2, width=20)
@@ -79,6 +81,36 @@ class AddStudentWindow(tk.Tk):
 
         database_obj = database.Database(add_student)
         database_obj.add_student()
+
+        self.destroy()
+
+
+class DeleteStudentWindow(tk.Tk):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs )
+
+        self.title("Delete Student Info")
+        self.geometry("500x200")
+
+        tk.Label(self, text="Student Name:").grid(row=0, column=0, sticky='e')
+        self.student_name = tk.Text(self, height=2, width=20)
+        self.student_name.grid(row=0, column=1)
+
+        self.submit_button = tk.Button(self, text="Submit", command=self.delete)
+        self.submit_button.grid(row=4, column=0, columnspan=2)
+
+    def delete(self):
+        student_name = self.student_name.get("1.0", "end-1c")
+        delete_student = student.Student(student_name, 1231541987, "8:00", "Monday")
+
+        database_obj = database.Database(delete_student)
+        database_obj.delete_student()
+
+        self.destroy()
+
+
+
+
 
 
 if __name__ == "__main__":

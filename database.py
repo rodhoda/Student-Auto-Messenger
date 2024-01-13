@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine, Column, Integer, String, Time, text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-import sqlalchemy as sql
+from sqlalchemy import delete
 
 Base = declarative_base()
 
@@ -12,9 +12,9 @@ class Student(Base):
 
     StudentID = Column(Integer, primary_key=True)
     Name = Column(String(255), nullable=False)
-    Phone = Column(String(10), nullable=False)
-    Class_time = Column(Time, nullable=False)
-    Class_day = Column(String(10), nullable=False)
+    Phone = Column(String(10), nullable=True)
+    Class_time = Column(Time, nullable=True)
+    Class_day = Column(String(10), nullable=True)
 
 
 # Create the database engine
@@ -44,5 +44,8 @@ class Database():
         self.session.add(new_student)
         self.session.commit()
 
-
+    def delete_student(self):
+        student = self.session.query(Student).filter_by(Name=self.student_name).one()
+        self.session.delete(student)
+        self.session.commit()
 
