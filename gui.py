@@ -101,7 +101,7 @@ class DeleteStudentWindow(tk.Tk):
 
     def delete(self):
         student_name = self.student_name.get("1.0", "end-1c")
-        delete_student = student.Student(student_name, 1231541987, "8:00", "Monday")
+        delete_student = student.Student(student_name)
 
         database_obj = database.Database(delete_student)
         database_obj.delete_student()

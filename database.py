@@ -45,7 +45,8 @@ class Database():
         self.session.commit()
 
     def delete_student(self):
-        student = self.session.query(Student).filter_by(Name=self.student_name).one()
-        self.session.delete(student)
-        self.session.commit()
+        student = self.session.query(Student).filter_by(Name=self.student_name)
+        for s in student:
+            self.session.delete(s)
+            self.session.commit()
 
