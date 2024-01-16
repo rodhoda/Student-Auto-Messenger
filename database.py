@@ -50,3 +50,6 @@ class Database():
             self.session.delete(s)
             self.session.commit()
 
+    def view_student_info(self):
+        student = self.session.query(Student).filter_by(Name=self.student_name)
+        return [attribute for s in student for attribute in (s.Name, s.Phone, s.Class_day, s.Class_time)]
